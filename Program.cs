@@ -1,15 +1,16 @@
 ﻿using System;
 
-namespace СonsoleApp12;
+namespace СonsoleApp13.Interface;
 
 
-public interface IComputer
+interface IComputer
 {
     string ComputerName { get; set; }
     float Sum(float a, float b);
     float Subtract(float a, float b);
     float Multiply(float a, float b);
     float Divide(float a, float b);
+    float SquareRoot(float num1);
 }
 
 
@@ -38,11 +39,16 @@ class Computer : IComputer
             throw new DivideByZeroException("Деление на ноль");
         return a / b;
     }
+
+    public float SquareRoot(float num1)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 class Program
 {
-    static void Main()
+    static void House()
     {
         IComputer calculator = new Computer();
         Console.WriteLine($"Начать решение в {calculator.ComputerName}");
@@ -64,7 +70,7 @@ class Program
         }
 
        
-        Console.WriteLine("Выберите операцию (+, -, *, /):");
+        Console.WriteLine("Выберите операцию (+, -, *, /, √):");
         string op = Console.ReadLine();
 
         try
@@ -84,6 +90,8 @@ class Program
                 case "/":
                     result = calculator.Divide(num1, num2);
                     break;
+                case "√":
+                    result = calculator.SquareRoot(num1);
                 default:
                     Console.WriteLine("Неизвестно");
                     return;
